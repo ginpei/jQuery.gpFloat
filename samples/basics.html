@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+
+<!-- There are JavaScript sample codes in bottom. -->
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery.gpFloat</title>
+  <style type="text/css">
+body {
+    background-color: #cef;
+    background-image: url("body-bg.gif");
+    font-family: "Times", "Times New Roman", serif;
+    margin: 20px 0 0 20px;
+    min-height: 3000px;
+    min-width: 3000px;
+}
+pre {
+    background-color: #fffff0;
+    border: ridge 2px;
+    display: inline-block;
+    font-family: 'Courier', 'Courier New', monospace;
+    padding: 1em;
+}
+h1 {
+    left: 30px;
+    margin: 0;
+    position: fixed;
+    top: 30px;
+}
+#main {
+    margin-top: 70px;
+    padding: 1em;
+}
+
+/* measure */
+.measure {
+    position: relative;
+    z-index: 100;
+}
+.measure > div {
+    background-color: #fff;
+    background-image: url("measure-bg.gif");
+    border: none 1px #ccc;
+    height: 19px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 19px;
+}
+.measure > .measure-root {
+    border-color: #ccc;
+    border-style: none solid solid none;
+    color: #999;
+    z-index: 1;
+}
+.measure > .measure-x {
+    border-bottom-style: solid;
+    left: 20px;
+    width: 10000px;
+}
+.measure > .measure-y {
+    border-right-style: solid;
+    height: 10000px;
+    top: 20px;
+}
+
+/* footer */
+#footer {
+    background-color: #000;
+    border-top: solid 1px #999;
+    bottom: 0;
+    color: #fff;
+    padding: 2px;
+    position: fixed;
+    left: 0;
+    white-space: nowrap;
+    min-width: 100%;
+    z-index: 100;
+}
+  </style>
+</head>
+<body>
+  <h1>jQuery.gpFloat</h1>
+  <div id="main">
+    <p>Fix horizon position but free vertical one.</p>
+    <p>for: IE 8+, Firefox, Chrome, Safari, Opera</p>
+    <p>
+      <pre>$(elem).gpFloatX();
+$(elem).gpFloatY();</pre>
+    </p>
+    <p>
+      The measure on top is fixed against vertical scrolling,<br />
+      but it will move with window horizon scrolling.<br />
+      The left one acts similarly.
+    </p>
+    <p>
+      The footer on bottom will scroll horizon if it has more area.<br />
+      It will not scroll if its right edge is displayed.
+    </p>
+    <p>
+      Get more sample codes in HTML source,<br />
+      and more informations in: <a href="http://ginpen.com">Ginpen.com</a>.
+    </p>
+  </div>
+  <div class="measure">
+    <div class="measure-root">Measure</div>
+    <div class="measure-x"></div>
+    <div class="measure-y"></div>
+  </div>
+  <div id="footer">
+    the
+    long long long long long long long long long long
+    long long long long long long long long long long
+    long long long long long long long long long long
+    footer
+  </div>
+  <div>
+    <script src="jquery-1.6.2.min.js"></script>
+    <script src="../jquery.gpfloat-1.0.min.js"></script>
+    <script>
+// Basics
+$('.measure-x').gpFloatX();
+$('.measure-y').gpFloatY();
+
+// Or
+$('h1').gpFloat({ direction: 'x' });
+
+// Custom position culclating
+$('#footer').gpFloatX({
+    getLeft: function(originalX, scrollLeft, $el) {
+        // not scroll if the block end is displaied
+        var clientWidth = document.documentElement.clientWidth;
+        var width = $el.outerWidth();
+        if (clientWidth + scrollLeft >= width) {
+            return - width + clientWidth;
+        }
+        else {
+            return originalX - scrollLeft;
+        }
+    }
+});
+    </script>
+  </div>
+</body>
+</html>

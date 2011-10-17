@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+
+<!-- There are JavaScript sample codes in bottom. -->
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery.gpFloat</title>
+  <style type="text/css">
+body {
+    background-color: #cef;
+    background-image: url("body-bg.gif");
+    font-family: "Times", "Times New Roman", serif;
+    margin: 20px 0 0 20px;
+    min-height: 3000px;
+    min-width: 3000px;
+}
+pre {
+    background-color: #fffff0;
+    border: ridge 2px;
+    display: inline-block;
+    font-family: 'Courier', 'Courier New', monospace;
+    padding: 1em;
+}
+h1 {
+    left: 30px;
+    margin: 0;
+    position: fixed;
+    top: 30px;
+}
+#main {
+    margin-top: 70px;
+    padding: 1em;
+}
+
+/* balloon */
+.balloon {
+    background-color: #fff;
+    border: solid 1px #eee;
+    border-radius: 999px;
+    color: #999;
+    position: absolute;
+    text-align: center;
+    z-index: 1;
+}
+.balloon-depth1 {
+    height: 50px;
+    font-size: 20px;
+    line-height: 50px;
+    width: 100px;
+    z-index: 3;
+}
+.balloon-depth2 {
+    height: 40px;
+    font-size: 16px;
+    line-height: 40px;
+    width: 80px;
+    z-index: 2;
+}
+.balloon-depth3 {
+    height: 20px;
+    font-size: 6px;
+    line-height: 20px;
+    width: 40px;
+    z-index: 1;
+}
+  </style>
+</head>
+<body>
+  <h1>jQuery.gpFloat</h1>
+  <div id="balloon-container">
+    <div class="balloon balloon-depth3" style="left: 500px; top: 300px">Balloon</div>
+    <div class="balloon balloon-depth1" style="left: 410px; top: 220px">Balloon</div>
+    <div class="balloon balloon-depth2" style="left: 530px; top: 250px">Balloon</div>
+    <div class="balloon balloon-depth2" style="left: 430px; top: 330px">Balloon</div>
+    <div class="balloon balloon-depth1" style="left: 500px; top: 350px">Balloon</div>
+  </div>
+  <div>
+    <script src="jquery-1.6.2.min.js"></script>
+    <script src="../jquery.gpfloat-1.0.min.js"></script>
+    <script>
+$('.balloon-depth1').gpFloat({
+    direction: 'xy',
+    getLeft: function(originalX, scrollLeft, $el) { return originalX - scrollLeft / 2; },
+    getTop: function(originalY, scrollTop, $el) { return originalY - scrollTop / 2; }
+});
+$('.balloon-depth2').gpFloat({
+    direction: 'xy',
+    getLeft: function(originalX, scrollLeft, $el) { return originalX - scrollLeft / 5; },
+    getTop: function(originalY, scrollTop, $el) { return originalY - scrollTop / 5; }
+});
+$('.balloon-depth3').gpFloat({
+    direction: 'xy',
+    getLeft: function(originalX, scrollLeft, $el) { return originalX - scrollLeft / 10; },
+    getTop: function(originalY, scrollTop, $el) { return originalY - scrollTop / 10; }
+});
+    </script>
+  </div>
+</body>
+</html>
