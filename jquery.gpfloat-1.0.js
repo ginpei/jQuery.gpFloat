@@ -1,3 +1,14 @@
+/**
+ * jQuery.gpFloat 1.0
+ * http://ginpen.com/jquery/gpfloat/
+ * https://github.com/ginpei/jQuery.gpFloat
+ *
+ * Copyright (c) 2011 Takanashi Ginpei
+ * http://ginpen.com
+ *
+ * Released under the MIT License.
+ * http://www.opensource.org/licenses/mit-license.php
+ */
 ;(function($) {
     try {
         if (window.com.ginpen.gpFloat) { return; }
